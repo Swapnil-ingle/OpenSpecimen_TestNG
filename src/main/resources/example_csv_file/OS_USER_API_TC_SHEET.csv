@@ -1,5 +1,5 @@
-opComments,id,firstName,lastName,emailAddress,domainName,loginName,instituteId,instituteName,primarySite,type,phoneNumber,manageForms,dnd,address,timeZone,creationDate,activityStatus,Ignore,API Type,Run as (user:pwd),TC_ID,Description,TC_TYPE,Run Status,Date,Message
-,2,,,,,,,,,,,,,,,,,,GET,,TC_ID1,Getting a user,POSITIVE,Pass,6/1/2020,
-,,KSPL,user5,kspl@user5.com,openspecimen,kspl@user5.com,,Test_INST,Test_Site,SUPER,,TRUE,TRUE,,,,Active,,POST,,TC_ID2,Adding a user,POSITIVE,Pass,6/1/2020,
-,,KSPL,EDITED,editTest@gmail.com,openspecimen,editTest@gmail.com,,Test_INST,Test_Site,SUPER,,TRUE,TRUE,,,,Active,,PUT,,TC_ID3,Editing a user,POSITIVE,Pass,6/1/2020,
-,,KSPL,user7,kspl@user7.com,openspecimen,kspl@user7.com,,Test_INST,Test_Site,SUPER,,TRUE,TRUE,,,,Active,,DELETE,,TC_ID4,Deleting a user,POSITIVE,Pass,6/1/2020,
+"opComments","id","firstName","lastName","emailAddress","domainName","loginName","instituteId","instituteName","primarySite","type","phoneNumber","manageForms","dnd","address","timeZone","creationDate","activityStatus","Ignore","API Type","Run as (user:pwd)","TC_ID","Description","TC_TYPE"
+"","2","","","","","","","","","","","","","","","","","","GET","","TC_ID1","Getting a user","POSITIVE"
+"","","KSPL","user5","kspl@user5.com","openspecimen","kspl@user5.com","","Test_INST","Test_Site","SUPER","","TRUE","TRUE","","","","Active","","POST","","TC_ID2","Adding a user","POSITIVE"
+"","","KSPL","EDITED","editTest@gmail.com","openspecimen","editTest@gmail.com","","Test_INST","Test_Site","SUPER","","TRUE","TRUE","","","","Active","","PUT","","TC_ID3","Editing a user","POSITIVE"
+"","","KSPL","user7","kspl@user7.com","openspecimen","kspl@user7.com","","Test_INST","Test_Site","SUPER","","TRUE","TRUE","","","","Active","","DELETE","","TC_ID4","Deleting a user","POSITIVE"
