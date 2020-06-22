@@ -56,6 +56,7 @@ public class UndoEntities {
 			logger.info("Successfully undone POST API call for user.");
 			logger.debug("(" + user + ")");
 		} catch (Exception e) {
+			logger.error("Failed to undo user POST operation: " + e.getMessage() + " Please undo manually " + userJson);
 			Assert.fail("Failed to undo user POST operation: " + e.getMessage() + " Please undo manually " + userJson);
 		}
 	}
@@ -68,6 +69,7 @@ public class UndoEntities {
 			logger.info("Successfully undone PUT API call for user.");
 			logger.debug("(" + user + ")");
 		} catch (Exception e) {
+			logger.error("Failed to undo user PUT operation: " + e.getMessage() + " Please undo manually " + userJson);
 			throw new SkipException(
 					"Failed to undo user PUT operation: " + e.getMessage() + " Please undo manually " + userJson);
 		}
@@ -81,6 +83,7 @@ public class UndoEntities {
 			logger.info("Successfully undone DELETE API call for user.");
 			logger.debug("(" + user + ")");
 		} catch (Exception e) {
+			logger.error("Failed to undo user DELETE operation: " + e.getMessage() + " Please undo manually " + userJson);
 			throw new SkipException(
 					"Failed to undo user DELETE operation: " + e.getMessage() + " Please undo manually " + userJson);
 		}
