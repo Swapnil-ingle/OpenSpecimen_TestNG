@@ -23,7 +23,7 @@ public class APICaller {
 	public static CloseableHttpResponse callGET(String url, String authHeader)
 			throws ClientProtocolException, IOException {
 		HttpGet request = new HttpGet(url);
-		request.setHeader(HttpHeaders.AUTHORIZATION, Config.getAuthHeader(authHeader));
+		request.setHeader(HttpHeaders.AUTHORIZATION, Config.getInstance().getAuthHeader(authHeader));
 
 		CloseableHttpClient client = Utility.getHttpClient();
 		return client.execute(request);
@@ -56,7 +56,7 @@ public class APICaller {
 	public static CloseableHttpResponse callDELETE(String url, String authHeader)
 			throws ClientProtocolException, IOException {
 		HttpDelete request = new HttpDelete(url);
-		request.setHeader(HttpHeaders.AUTHORIZATION, Config.getAuthHeader(authHeader));
+		request.setHeader(HttpHeaders.AUTHORIZATION, Config.getInstance().getAuthHeader(authHeader));
 
 		CloseableHttpClient client = Utility.getHttpClient();
 		return client.execute(request);
@@ -64,7 +64,7 @@ public class APICaller {
 
 	private static CloseableHttpResponse processRequest(String authHeader, String json,
 			HttpEntityEnclosingRequestBase request) throws IOException, ClientProtocolException {
-		request.setHeader(HttpHeaders.AUTHORIZATION, Config.getAuthHeader(authHeader));
+		request.setHeader(HttpHeaders.AUTHORIZATION, Config.getInstance().getAuthHeader(authHeader));
 
 		HttpEntity httpEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
 		request.setEntity(httpEntity);

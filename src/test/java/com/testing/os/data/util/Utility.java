@@ -18,14 +18,17 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 
 import com.testing.os.data.entity.BaseRowEntity;
-import com.testing.os.data.entity.UserRowDetail;
+import com.testing.os.data.tc.UserTesting;
 
 public class Utility {
+	private static final Logger logger = Logger.getLogger(UserTesting.class);
+
 	public static boolean toBoolean(String value) {
 		return value == null ? false : Boolean.valueOf(value);
 	}
@@ -36,11 +39,11 @@ public class Utility {
 		}
 
 		try {
-			SimpleDateFormat format = new SimpleDateFormat(Config.INPUT_DATE_FMT);
+			SimpleDateFormat format = new SimpleDateFormat(Config.getInstance().getCsvInputDateFmt());
 			return format.parse(date);
 		} catch (ParseException e) {
 			Assert.fail("Error parsing date: Please confirm that the input date format matches to - "
-					+ Config.INPUT_DATE_FMT);
+					+ Config.getInstance().getCsvInputDateFmt());
 		}
 
 		return null;
@@ -69,8 +72,8 @@ public class Utility {
 			return null;
 		} else if (json.charAt(0) == '[') {
 			// The resp is probably an array --> resolving it accordingly
-			JSONArray users = new JSONArray(json);
-			return users.getJSONObject(0);
+			JSONArray jsonArray = new JSONArray(json);
+			return jsonArray.optJSONObject(0);
 		} else {
 			return new JSONObject(json);
 		}
@@ -93,26 +96,6 @@ public class Utility {
 		return new JSONArray(stringResp);
 	}
 
-	public static Long getUserIdFromLoginName(UserRowDetail user) throws KeyManagementException,
-			NoSuchAlgorithmException, KeyStoreException, ClientProtocolException, IOException {
-		if (user.getLoginName() == null || user.getLoginName().isEmpty()) {
-			Assert.fail("Cannot resolve user ID from loginName: LoginName is Empty");
-		}
-
-		String url = Config.getUsersApiUrl() + "?loginName=" + user.getLoginName();
-
-		CloseableHttpResponse resp = APICaller.callGET(url, user.getRunAs());
-		int statusCode = resp.getStatusLine().getStatusCode();
-		JSONArray users = getJsonArrayFromResponse(resp);
-
-		if (statusCode != HttpStatus.SC_OK || users.isEmpty()) {
-			Assert.fail("Cannot resolve user ID from loginName: User with loginName does not exists");
-		}
-
-		System.out.println("Got user from loginName: " + users.toString());
-		return Utility.getLongAttrFromJSON(users.getJSONObject(0), "id");
-	}
-
 	public static CloseableHttpClient getHttpClient() {
 		try {
 			return HttpClients.custom()
@@ -133,7 +116,7 @@ public class Utility {
 			throws IOException, ClientProtocolException {
 		int statusCode = response.getStatusLine().getStatusCode();
 		String stringResp = EntityUtils.toString(response.getEntity());
-		System.out.println("Response: " + stringResp);
+		logger.debug("Response: " + stringResp);
 
 		if (entity == null) {
 			Assert.assertEquals(statusCode, HttpStatus.SC_OK);

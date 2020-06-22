@@ -1,4 +1,4 @@
-package com.testing.os.data.prereq;
+package com.testing.os.data.tc.prereq;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -6,47 +6,50 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeGroups;
 
 import com.testing.os.data.util.APICaller;
 import com.testing.os.data.util.Config;
 import com.testing.os.data.util.Utility;
 
-public class Prerequisites {
-	@BeforeSuite
+public class UserPreReq {
+	private static final Logger logger = Logger.getLogger(UserPreReq.class);
+
+	@BeforeGroups("Users")
 	public void addPrerequisites() {
 		try {
 			addInstitute();
 			addSite();
 			addCp();
 		} catch (Exception e) {
-			System.out.println("Error while adding prerequisite: " + e.getMessage());
+			logger.info("Error while adding prerequisite: " + e.getMessage());
 			Assert.fail("Error while adding prerequisites", e);
 		}
 	}
-
+	
 	private String addInstitute() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException,
 			ClientProtocolException, IOException {
-		System.out.println("Prerequisite: Adding institute");
+		logger.info("User Prerequisite: Adding institute");
 
-		String url = Config.getInstituteApiUrl();
-		return Utility.processResponse(APICaller.callPOST(url, Config.PRE_REQ_INSTITUTE_JSON));
+		String url = Config.getInstance().getInstituteApiUrl();
+		return Utility.processResponse(APICaller.callPOST(url, Config.getInstance().getPreReqInstituteJson()));
 	}
 
 	private String addSite() throws ClientProtocolException, IOException, KeyManagementException,
 			NoSuchAlgorithmException, KeyStoreException {
-		System.out.println("Prerequisite: Adding Site");
+		logger.info("User Prerequisite: Adding Site");
 
-		String url = Config.getSiteApiUrl();
-		return Utility.processResponse(APICaller.callPOST(url, Config.PRE_REQ_SITE_JSON));
+		String url = Config.getInstance().getSiteApiUrl();
+		return Utility.processResponse(APICaller.callPOST(url, Config.getInstance().getPreReqSiteJson()));
 	}
 
 	private String addCp() throws ClientProtocolException, IOException, KeyManagementException,
 			NoSuchAlgorithmException, KeyStoreException {
-		System.out.println("Prerequisite: Adding Cp");
+		logger.info("User Prerequisite: Adding Cp");
 
-		String url = Config.getCpApiUrl();
-		return Utility.processResponse(APICaller.callPOST(url, Config.PRE_REQ_CP_JSON));
+		String url = Config.getInstance().getCpApiUrl();
+		return Utility.processResponse(APICaller.callPOST(url, Config.getInstance().getPreReqCpJson()));
 	}
 }

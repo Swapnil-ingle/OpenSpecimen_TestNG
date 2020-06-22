@@ -16,7 +16,7 @@ import com.testing.os.data.util.Utility;
 public class UserDataProvider {
 	@DataProvider(name = "userDataProvider")
 	public Iterator<Object[]> userDataProvider() throws IOException, CsvException {
-		CSVFileReader csvReader = new CSVFileReader(Config.USER_FILE_NAME);
+		CSVFileReader csvReader = new CSVFileReader(Config.getInstance().getCsvUserFile());
 		List<Object[]> testCases = new ArrayList<>();
 
 		for (String[] row : csvReader.readAll()) {
@@ -27,6 +27,7 @@ public class UserDataProvider {
 		return testCases.iterator();
 	}
 
+	// Move this under a factory service
 	private UserRowDetail getUserRowDetail(String[] row) {
 		UserRowDetail userRowDetail = new UserRowDetail();
 

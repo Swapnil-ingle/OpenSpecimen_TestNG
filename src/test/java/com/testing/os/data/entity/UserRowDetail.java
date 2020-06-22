@@ -206,4 +206,14 @@ public class UserRowDetail extends BaseRowEntity {
 	public String toJsonString() throws JsonProcessingException {
 		return new ObjectMapper().writeValueAsString(this);
 	}
+
+	@Override
+	public String toString() {
+		return "UserRowDetail [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailAddress="
+				+ emailAddress + ", domainName=" + domainName + ", loginName=" + loginName + ", instituteId="
+				+ instituteId + ", instituteName=" + instituteName + ", primarySite=" + primarySite + ", type=" + type
+				+ ", phoneNumber=" + phoneNumber + ", manageForms=" + manageForms + ", dnd=" + dnd + ", address="
+				+ address + ", timeZone=" + timeZone + ", creationDate=" + creationDate + ", activityStatus="
+				+ activityStatus + "]";
+	}
 }

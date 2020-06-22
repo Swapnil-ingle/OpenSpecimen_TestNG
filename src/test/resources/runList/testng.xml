@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All">
+  <test name="UserCRUD">
+  	<groups>
+        <run>
+            <include name="Users"/>
+        </run>
+    </groups>
+    <packages>
+      <package name="com.testing.os.data.tc.*"/>
+    </packages>
+  </test> <!-- Users -->
+  <test name="SiteCRUD">
+  	<groups>
+        <run>
+            <include name="Sites"/>
+        </run>
+    </groups>
+    <packages>
+      <package name="com.testing.os.data.tc.*"/>
+    </packages>
+  </test> <!-- Sites -->
+</suite> <!-- All -->
